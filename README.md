@@ -7,7 +7,9 @@ This repo make a docker image with database
 
 ## Tables
 
-![Image of Yaktocat](Diagrama-ER.png)
+
+
+<img src="https://raw.githubusercontent.com/saidmlx/docker-mysql-5-courses/master/Diagrama-ER.png" alt="Diagram-ER" title="Diagram-ER" width="30%" height="30%" />
 
 #### Course
 

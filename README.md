@@ -5,48 +5,59 @@ This repo make a docker image with database
 ## Mysql
 - version 5.7
 
-## Database
- Courses
+## Tables
 
-### Tables
+![Image of Yaktocat](Diagrama-ER.png)
 
 #### Course
 
 Name: course
 
-| Column     |      Type     |       |
-|------------|:-------------:|------:|
-| id_course  | int(11)       |       |
-| id_teacher | int(11)       |       |
-| name       | varchar(250)  |       |
-| themes     | text          |       |
-| project    | varchar(250)  |       |
+| Field      | Type         | Null | Key | Default | Extra          |
+|------------|:-------------|:-----|:----|:--------|:--------------:|
+| id_course  | int(11)      | NO   | PRI | NULL    | auto_increment |
+| id_teacher | int(11)      | YES  | MUL | NULL    |                |
+| name       | varchar(250) | NO   |     | NULL    |                |
+| themes     | text         | YES  |     | NULL    |                |
+| project    | varchar(250) | YES  |     | NULL    |                |
 
 #### Teacher
 
 Name: teacher
 
-| Column     |      Type     |       |
-|------------|:-------------:|------:|
-|            |               |       |
+| Field      | Type         | Null | Key | Default | Extra          |
+|------------|:-------------|:-----|:----|:--------|:--------------:|
+| id_teacher | int(11)      | NO   | PRI | NULL    | auto_increment |
+| name       | varchar(250) | NO   |     | NULL    |                |
+| avatar     | varchar(250) | NO   |     | NULL    |                |
+
 
 #### Social Media
 
 Name: social_media
 
-| Column     |      Type     |       |
-|------------|:-------------:|------:|
-|            |               |       |
+
+| Field           | Type         | Null | Key | Default | Extra          |
+|-----------------|:-------------|:-----|:----|:--------|:--------------:|
+| id_social_media | int(11)      | NO   | PRI | NULL    | auto_increment |
+| name            | varchar(250) | NO   |     | NULL    |                |
+| icon            | varchar(250) | YES  |     | NULL    |                |
+
 
 #### Teacher Social Media
 
 Name: teacher_social_media
 
-| Column     |      Type     |       |
-|------------|:-------------:|------:|
-|            |               |       |
 
-## Compile image as docker
+| Field                   | Type         | Null | Key | Default | Extra          |
+|-------------------------|:-------------|:-----|:----|:--------|:---------------|
+| id_teacher_social_media | int(11)      | NO   | PRI | NULL    | auto_increment |
+| id_teacher              | int(11)      | NO   | MUL | NULL    |                |
+| id_social_media         | int(11)      | NO   | MUL | NULL    |                |
+| nickname                | varchar(250) | NO   |     | NULL    |                |
+
+
+## Compile Docker Image
 
 ```terminal
 $ git clone https://github.com/saidmlx/docker-mysql-5-courses.git
@@ -65,7 +76,7 @@ Successfully built f968598de225
 Successfully tagged courses:latest
 ```
 
-```
+```bash
 $ docker image ls
 REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 courses             latest              4429369fa8e1        20 seconds ago      372MB
@@ -86,7 +97,7 @@ af89073555dc        courses             docker-entrypoint.s…   19 seconds ago 
 
 ## get inside mysql
 
-```terminal
+```sql
 $ docker exec -it mysql-db mysql -p
 Enter password:
 Welcome to the MySQL monitor.  Commands end with ; or \g.
